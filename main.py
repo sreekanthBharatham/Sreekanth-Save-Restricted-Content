@@ -14,11 +14,22 @@ api_hash = environ.get("HASH", "")
 api_id = environ.get("ID", "")
 bot = Client("mybot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
+# List of authorized users (user IDs)
+AUTHORIZED_USERS = [6862634182]  # Replace with your own user IDs
+
+
 ss = environ.get("STRING", "")
 if ss is not None:
 	acc = Client("myacc" ,api_id=api_id, api_hash=api_hash, session_string=ss)
 	acc.start()
 else: acc = None
+
+@bot.message_handler(commands=['start'])
+def start_command(message):
+    if message.from_user.id in AUTHORIZED_USERS:
+        bot.reply_to(message, "You are authorized to use this bot good to go.")
+    else:
+        bot.reply_to(message, "You are not authorized to use this bot Please Contact Admin to credentials")
 
 # download status
 def downstatus(statusfile,message):
