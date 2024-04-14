@@ -1,5 +1,4 @@
 import pyrogram
-import telebot
 from pyrogram import Client, filters
 from pyrogram.errors import UserAlreadyParticipant, InviteHashExpired, UsernameNotOccupied
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -25,7 +24,7 @@ if ss is not None:
 	acc.start()
 else: acc = None
 
-@bot.message_handler(commands=['start'])
+
 def start_command(message):
     if message.from_user.id in AUTHORIZED_USERS:
         bot.reply_to(message, "You are authorized to use this bot good to go.")
